@@ -10,7 +10,7 @@ const dictContainer = document.querySelector(".dictcontainer");
 
 applyInitialPaneSizes();
 
-function resizeCol(e){
+function resizeCol(e) {
   const dx = mouse_pos - e.x;
   mouse_pos = e.x;
   // getting the width with computedStyle doesn't seem to be working correctly.
@@ -30,7 +30,7 @@ function resizeCol(e){
   localStorage.setItem("textWidth", lfWidthPct);
 }
 
-function resizeRow(e){
+function resizeRow(e) {
   const dx = mouse_pos - e.y;
   mouse_pos = e.y;
   const currentHeightWordFrame = parseFloat(window.getComputedStyle(readPaneRight).gridTemplateRows.split(" ")[0]);
@@ -72,6 +72,8 @@ function resizePaneRight(e) {
   e.preventDefault();
 }
 
+// Mobile resize logic disabled for Bottom Nav layout
+/*
 if (mediaTablet.matches) {
   readPaneRight.addEventListener("pointerdown", function(e){
     if (e.offsetY < borderWidth) {
@@ -85,8 +87,9 @@ if (mediaTablet.matches) {
     }
   });
 }
+*/
 
-readPaneRight.addEventListener("mousedown", function(e){
+readPaneRight.addEventListener("mousedown", function (e) {
   if (e.offsetX < borderWidth) {
     setIFrameStatus("none");
     mouse_pos = e.x;
@@ -96,9 +99,9 @@ readPaneRight.addEventListener("mousedown", function(e){
 });
 
 // double click -> widen to 95% temporarily (doesn't save state)
-readPaneRight.addEventListener("dblclick", function(e){
+readPaneRight.addEventListener("dblclick", function (e) {
   if (e.target != e.currentTarget) return; // fixes: clicking dict tabs resizes panes
-  
+
   if (e.offsetX < borderWidth) {
     // if the width is 95% then return to the last width value
     if (readPaneLeft.style.width == "95%") {
@@ -109,15 +112,15 @@ readPaneRight.addEventListener("dblclick", function(e){
       readPaneLeft.style.width = "95%";
       readPaneRight.style.width = `${5 * getReadPaneWidthRatio()}%`;
     }
-    }
+  }
 });
 
-dictContainer.addEventListener("pointerdown", function(e){
+dictContainer.addEventListener("pointerdown", function (e) {
   //if not stopPropagation resizing dictcontainer triggers parent event which resizes
   //readPaneRight at the same time (for @media 900)
   e.stopPropagation();
   // resize only if the border is selected. fixes: clicking on tab buttons area also able to resize pane
-  if (e.target != e.currentTarget) return; 
+  if (e.target != e.currentTarget) return;
 
   setIFrameStatus("none");
   if (e.offsetY < borderWidth) {
@@ -127,9 +130,9 @@ dictContainer.addEventListener("pointerdown", function(e){
   }
 });
 
-dictContainer.addEventListener("dblclick", function(e){
-  if (e.target != e.currentTarget) return; 
-  
+dictContainer.addEventListener("dblclick", function (e) {
+  if (e.target != e.currentTarget) return;
+
   if (e.offsetY < borderWidth) {
     if (readPaneRight.style.gridTemplateRows.split(" ")[0] == "5%") {
       readPaneRight.style.gridTemplateRows = `${getFromLocalStorage("trHeight", trHeightDefault)}% 1fr`;
@@ -139,7 +142,7 @@ dictContainer.addEventListener("dblclick", function(e){
   }
 });
 
-document.addEventListener("pointerup", function(){
+document.addEventListener("pointerup", function () {
   document.removeEventListener("mousemove", resizeCol);
   document.removeEventListener("pointermove", resizeRow);
   setIFrameStatus("unset");
@@ -163,7 +166,7 @@ function getReadPaneWidthRatio() {
   return parseFloat(window.getComputedStyle(readPaneContainer).getPropertyValue("width")) / parseFloat(document.documentElement.clientWidth);
 }
 
-function clamp (num, min, max) {
+function clamp(num, min, max) {
   return Math.min(Math.max(num, min), max);
 }
 
@@ -191,14 +194,18 @@ function applyInitialPaneSizes() {
   const pane_right_width = (100 - width) * ratio;
 
   readPaneLeft.style.width = `${width}%`;
-  readPaneRight.style.width = `${pane_right_width}%`;
-  readPaneRight.style.gridTemplateRows = `${height}% 1fr`;
+
+  // On mobile, we use CSS classes and fixed layouts. Do not override with JS.
+  if (!mediaTablet.matches) {
+    readPaneRight.style.width = `${pane_right_width}%`;
+    readPaneRight.style.gridTemplateRows = `${height}% 1fr`;
+  }
 }
 
 function getFromLocalStorage(item, defaultVal) {
   // return Number(localStorage.getItem(item) ?? defaultVal);
   const storageVal = localStorage.getItem(item);
-  
+
   if ((!storageVal) || isNaN(storageVal)) {
     return Number(defaultVal);
   } else {
