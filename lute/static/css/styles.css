@@ -1503,6 +1503,7 @@ input[type="checkbox"][disabled]+label {
     width: 100%;
     /* height: 100%; */
     flex: 1;
+    pointer-events: auto;
 }
 
 #dict-menu-container {
@@ -1684,6 +1685,10 @@ input[type="checkbox"][disabled]+label {
     height: 100%;
     width: 100%;
     overflow: hidden;
+}
+
+.dictcontainer {
+    pointer-events: none;
 }
 
 #wordframeid {
