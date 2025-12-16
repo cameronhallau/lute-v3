@@ -28,7 +28,7 @@ body {
     background-color: var(--background-color);
     color: var(--font-color);
 
-    font: 100%/1.25 "Lucida Grande",Arial,sans-serif,STHeiti,"Arial Unicode MS",MingLiu;
+    font: 100%/1.25 "Lucida Grande", Arial, sans-serif, STHeiti, "Arial Unicode MS", MingLiu;
 }
 
 /* Main container div for Lute site content. */
@@ -38,17 +38,17 @@ body {
     box-sizing: border-box;
 }
 
- .lutelogo_small
- {
-     margin-right: 2px;
-     float: left;
-     width: 50px;
-     height: auto;
- }
+.lutelogo_small {
+    margin-right: 2px;
+    float: left;
+    width: 50px;
+    height: auto;
+}
 
 .header {
     display: flex;
-    align-items: center; /* Vertically center the items */
+    align-items: center;
+    /* Vertically center the items */
 }
 
 a.home-link {
@@ -57,17 +57,21 @@ a.home-link {
 }
 
 a.home-link:hover {
-    text-decoration: none !important; /* Remove underline on hover */
+    text-decoration: none !important;
+    /* Remove underline on hover */
 }
 
 .lutelogo {
-    width: auto; /* Reset the width to auto */
-    height: 3em; /* Set the height to match the text's font size */
+    width: auto;
+    /* Reset the width to auto */
+    height: 3em;
+    /* Set the height to match the text's font size */
     margin-right: 10px;
 }
 
 .title-container {
-    flex: 1; /* Allow the title to take up remaining space */
+    flex: 1;
+    /* Allow the title to take up remaining space */
 }
 
 p.version {
@@ -97,11 +101,12 @@ p.version {
 }
 
 .menu-item {
-    position: relative; /* Required for sub-menu positioning */
+    position: relative;
+    /* Required for sub-menu positioning */
 }
 
 /* main menu item text (not links) */
-.menu-item > span {
+.menu-item>span {
     text-decoration: none;
     display: block;
     cursor: pointer;
@@ -110,7 +115,7 @@ p.version {
     color: black !important;
 }
 
-.menu-item > a:hover {
+.menu-item>a:hover {
     text-decoration: none;
 }
 
@@ -127,7 +132,8 @@ p.version {
 }
 
 .last-sub-menu {
-    right: 0; /* Align the right edge of the sub-menu with the right edge of its container */
+    right: 0;
+    /* Align the right edge of the sub-menu with the right edge of its container */
 }
 
 .sub-menu li {
@@ -167,7 +173,8 @@ div#booktable_wrapper div.dt-info {
 
 #defaultLanguageSelect {
     text-align: left;
-    padding: 4px;  /* copied padding from datatables css. */
+    padding: 4px;
+    /* copied padding from datatables css. */
     margin-right: 10px;
 }
 
@@ -184,6 +191,7 @@ a.book-title:before {
     height: 1rem;
     flex-shrink: 0;
 }
+
 /* flex fixes wrapping issue */
 .book-title {
     display: inline-flex;
@@ -240,7 +248,7 @@ table#booktable:not(:has(a.completed_book)) a.book-title:before {
     position: absolute;
     background-color: #f9f9f9;
     min-width: 120px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     border-radius: 5px;
     padding: 5px;
@@ -366,19 +374,19 @@ div#read_pane_right {
     gap: 0.9rem;
     align-items: end;
 }
-    
+
 /* End layouts *****************************************/
 
 /* Reader slide-in hamburger menu. *********************/
 
 /* The hamburger slices. */
 span.hamburger {
-  width: 20px;
-  height: 4px;
-  /* margin-bottom: 3px; */
-  background: #777;
-  border-radius: 3px;
-  display: block;
+    width: 20px;
+    height: 4px;
+    /* margin-bottom: 3px; */
+    background: #777;
+    border-radius: 3px;
+    display: block;
 }
 
 .hamburger-btn {
@@ -393,34 +401,36 @@ span.hamburger {
 }
 
 #reading_menu.open-menu {
-  transform: translateX(0);
+    transform: translateX(0);
 }
 
 #reading_menu {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-    
-  padding: 0;
-  margin: 0;
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 1004; /* higher than audio, header and right_pane (for mobile view) */
-  height: 100vh;
-  border-right: 4px solid #a9cfef;
-  filter: drop-shadow(4px 0 4px #0000002e);
-  box-sizing: border-box;
-  background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
 
-  transform-origin: 0% 0%;
-  transform: translate(-110%, 0); /* 110 to hide the shadow */
-  transition: transform 0.3s cubic-bezier(0.77,0.2,0.05,1.0);
+    padding: 0;
+    margin: 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1004;
+    /* higher than audio, header and right_pane (for mobile view) */
+    height: 100vh;
+    border-right: 4px solid #a9cfef;
+    filter: drop-shadow(4px 0 4px #0000002e);
+    box-sizing: border-box;
+    background-color: var(--background-color);
+
+    transform-origin: 0% 0%;
+    transform: translate(-110%, 0);
+    /* 110 to hide the shadow */
+    transition: transform 0.3s cubic-bezier(0.77, 0.2, 0.05, 1.0);
 }
 
 #reading_menu ul {
-  margin: 0;
-  list-style: none;
+    margin: 0;
+    list-style: none;
 }
 
 #reading_menu .reading-menu-item {
@@ -438,51 +448,51 @@ span.hamburger {
 }
 
 .close-btn {
-  background-image: url("/static/icn/close.svg");
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 20px;
-  height: 20px;
-  padding: 0.9rem;
-  border-radius: 5px;
-  border: none;
-  background-size: 42.4%;
-  background-color: transparent;
-  cursor: pointer;
+    background-image: url("/static/icn/close.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    padding: 0.9rem;
+    border-radius: 5px;
+    border: none;
+    background-size: 42.4%;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 .reading-menu-close-btn {
-  margin-left: 5.4rem;
+    margin-left: 5.4rem;
 }
 
 #reading_menu .text-options-container {
-  display: grid;
-  grid-template-columns: max-content max-content;
-  justify-content: center;
-  gap: 0.2rem;
-  padding: 0;
-  margin-block: 1rem;
+    display: grid;
+    grid-template-columns: max-content max-content;
+    justify-content: center;
+    gap: 0.2rem;
+    padding: 0;
+    margin-block: 1rem;
 }
 
 .text-options-btn-container {
-  padding: 0.2rem;
-  border-radius: 5px;
+    padding: 0.2rem;
+    border-radius: 5px;
 }
 
 .reading_header_left {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 .reading_menu_logo_container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.4rem;
-  margin-bottom: 1.2rem;
-  background-color: aliceblue;
-  padding: 0.9rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 1.2rem;
+    background-color: aliceblue;
+    padding: 0.9rem 1.5rem;
 }
 
 #focus-container,
@@ -495,7 +505,7 @@ span.hamburger {
 
 #tap_sets_status-container {
     /* Toggled later in mobile media check. */
-    display:none;
+    display: none;
 }
 
 #focus,
@@ -543,8 +553,8 @@ span.hamburger {
 
 #tap_sets_status-container label,
 #tap_sets_status-container input {
-  display: inline-block;
-  vertical-align: middle;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .focus-mode-active #read_pane_right {
@@ -562,7 +572,8 @@ span.hamburger {
 }
 
 .reading-menu-top-level::after {
-    content: "\232A";  /* right angle bracket code. */
+    content: "\232A";
+    /* right angle bracket code. */
     position: absolute;
     right: 0;
 }
@@ -638,14 +649,19 @@ span.hamburger {
     }
 
     .reading-menu-sublist {
-        position: relative; /* relative to the parent */
-        left: 0; /* below the parent */
-        top: 0; /* at the same level as the parent */
-        width: 100%; /* Full width of the parent container */
+        position: relative;
+        /* relative to the parent */
+        left: 0;
+        /* below the parent */
+        top: 0;
+        /* at the same level as the parent */
+        width: 100%;
+        /* Full width of the parent container */
         border-right: none;
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
-        border-top-left-radius: 4px; /* Optional: Adjust corners */
+        border-top-left-radius: 4px;
+        /* Optional: Adjust corners */
         border-bottom-left-radius: 4px;
     }
 
@@ -655,10 +671,12 @@ span.hamburger {
 
     #page-operations-li:hover #page-operations-menu,
     #screen-interactions-li:hover #screen-interactions-menu {
-        position: relative; /* Prevent overflow issues */
+        position: relative;
+        /* Prevent overflow issues */
     }
 
 }
+
 /* End reading menu, mobile */
 
 /* End reader slide-in hamburger menu. *********************/
@@ -666,7 +684,8 @@ span.hamburger {
 .read_page_nav {
     display: block;
     font-size: 1.2rem;
-    line-height: 1; /* higher value adds unnecessary height */
+    line-height: 1;
+    /* higher value adds unnecessary height */
     cursor: pointer;
     user-select: none;
     color: var(--read-slider-color);
@@ -739,8 +758,7 @@ input[type=text].form-control-narrower {
     margin-block-end: 0px;
 }
 
-p
-{
+p {
     margin: 5px 0 5px 0;
     padding: 0;
 }
@@ -753,14 +771,12 @@ h2 {
     margin: 0.8rem 0;
 }
 
-h3
-{
+h3 {
     margin: 0px 0 0px 0;
     padding: 0;
 }
 
-h4
-{
+h4 {
     margin: 5px 0 10px 0;
     padding: 0;
 }
@@ -806,8 +822,8 @@ span.overlapped:before {
 }
 
 span.textsentence {
-     /* The weird "font-size: 0%" prevents excess space between the spans! */
-     /* span.textitem then re-sets the font size for the words. */
+    /* The weird "font-size: 0%" prevents excess space between the spans! */
+    /* span.textitem then re-sets the font size for the words. */
     font-size: 0%;
 }
 
@@ -827,12 +843,11 @@ span.textitem {
 
 /* .click */
 /* { */
-    /* cursor: pointer; */
-    /* color: #C00000; */
+/* cursor: pointer; */
+/* color: #C00000; */
 /* } */
 
-.hide
-{
+.hide {
     display: none;
 }
 
@@ -861,46 +876,39 @@ a:focus {
 a:active {
     color: #C00000;
 }
- 
- 
-img
-{
+
+
+img {
     border: 0pt none;
 }
 
-.wordhover
-{
+.wordhover {
     border-bottom: 1px solid blue !important;
 }
 
-.kwordmarked
-{
+.kwordmarked {
     border-bottom: 1px solid red !important;
 }
 
-.newmultiterm
-{
+.newmultiterm {
     background: yellow !important;
 }
 
-#termtags
-{
+#termtags {
     width: 340px;
     margin-top: 0px;
     margin-bottom: 0px;
     margin-left: 2px;
 }
 
-#texttags
-{
+#texttags {
     width: 340px;
     margin-top: 0px;
     margin-bottom: 0px;
     margin-left: 2px;
 }
 
-.nowrap
-{
+.nowrap {
     white-space: nowrap;
     margin-left: 20pt;
 }
@@ -914,18 +922,22 @@ img
     padding: 5px;
     border-radius: 3px;
     font-size: 12pt;
-    white-space: pre-line;  /* break if the text contains "\n" */
-    z-index: 500;  /* Initial z-index */
+    white-space: pre-line;
+    /* break if the text contains "\n" */
+    z-index: 500;
+    /* Initial z-index */
 }
 
 .manual-tooltip.hovered {
-    z-index: 10000;  /* Higher z-index when hovered */
+    z-index: 10000;
+    /* Higher z-index when hovered */
 }
 
 /* Widening the tooltip. */
 div.ui-tooltip {
     max-width: 400px !important;
-    z-index: 1000; /*higher than audio because of words on the bottom, but lower than header and side menu */
+    z-index: 1000;
+    /*higher than audio because of words on the bottom, but lower than header and side menu */
     word-wrap: break-word;
 }
 
@@ -1027,7 +1039,8 @@ div.code pre {
  */
 
 #read_pane_container {
-    --read-grid-margin: 0; /*(100 - 95) / 2 -> do not use calc here. does not work*/
+    --read-grid-margin: 0;
+    /*(100 - 95) / 2 -> do not use calc here. does not work*/
     width: 100%;
 }
 
@@ -1093,7 +1106,7 @@ div.code pre {
     border-radius: 5px;
     background-color: #fff;
     background-size: 60%;
-  
+
     background-position: center;
     background-repeat: no-repeat;
     padding: 0;
@@ -1109,7 +1122,7 @@ div.code pre {
     border-radius: 5px;
     background-color: #fff;
     background-size: 60%;
-  
+
     background-position: center;
     background-repeat: no-repeat;
 
@@ -1126,14 +1139,14 @@ div.code pre {
 }
 
 #read-slider::-webkit-slider-runnable-track {
-  -webkit-appearance: none;
-  box-shadow: none;
-  border: none;
+    -webkit-appearance: none;
+    box-shadow: none;
+    border: none;
 }
 
 #read-slider::-moz-range-track {
-  box-shadow: none;
-  border: none;
+    box-shadow: none;
+    border: none;
 }
 
 .read-slide-container {
@@ -1158,19 +1171,20 @@ div.code pre {
     border: none;
     padding: 0;
     border-radius: 50%;
-  
+
     background-color: white;
     cursor: pointer;
     user-select: none;
     --webkit-user-select: none;
 
-    display: none; /*temporarily*/
+    display: none;
+    /*temporarily*/
 }
 
 /* .read-bookmark-buttons-container { */
-    /* display: grid; */
-    /* grid-template-columns: min-content min-content; */
-    /* gap: 0.4rem; */
+/* display: grid; */
+/* grid-template-columns: min-content min-content; */
+/* gap: 0.4rem; */
 /* } */
 
 /* #read-bkm-save-btn {
@@ -1182,7 +1196,7 @@ div.code pre {
     background-size: 67%;
     background-color: transparent;
 } */
-  
+
 /* #read-bkm-prev-btn {
     background-image: url("/static/icn/prev.svg");
     height: 28px;
@@ -1210,10 +1224,10 @@ div.code pre {
 #text,
 #translation,
 #romanization,
-#book #title, 
+#book #title,
 #book #source_uri,
-#backup_dir, 
-#mecab_path, 
+#backup_dir,
+#mecab_path,
 #custom_styles,
 #language input,
 #importurl,
@@ -1234,8 +1248,10 @@ textarea {
 }
 
 .arrow_only_dropdown {
-    appearance: none; /* Hides default styling */
-    width: 20px; /* Only show the dropdown arrow */
+    appearance: none;
+    /* Hides default styling */
+    width: 20px;
+    /* Only show the dropdown arrow */
     overflow: hidden;
     border: none;
     background: none;
@@ -1264,6 +1280,7 @@ form input[type="checkbox"]:focus,
 form input[type="file"]:focus {
     border: none !important;
 }
+
 /* / */
 
 ::placeholder {
@@ -1283,7 +1300,8 @@ form input[type="file"]:focus {
 }
 
 /* TABLE STYLES */
-th, td {
+th,
+td {
     padding: 2px;
 }
 
@@ -1299,9 +1317,9 @@ div#mappingContainer input:not([type="checkbox"]) {
     width: 40%;
 }
 
-.statsWordsRead th, 
-.statsWordsRead td { 
-    padding: 5px; 
+.statsWordsRead th,
+.statsWordsRead td {
+    padding: 5px;
 }
 
 #book,
@@ -1385,7 +1403,8 @@ div.help-text {
 #translation {
     height: 50px;
     min-height: 50px;
-    vertical-align: top /* removes annoying extra space below */
+    vertical-align: top
+        /* removes annoying extra space below */
 }
 
 #term {
@@ -1437,8 +1456,8 @@ div.help-text {
     text-align: right;
 }
 
-input[type="checkbox"][disabled] + label {
-  color: #ccc;
+input[type="checkbox"][disabled]+label {
+    color: #ccc;
 }
 
 #term-button-container {
@@ -1450,7 +1469,8 @@ input[type="checkbox"][disabled] + label {
 }
 
 .zoomableTermImage {
-    transition: transform 0.2s; /* Animation */
+    transition: transform 0.2s;
+    /* Animation */
     border-radius: var(--form-border-radius);
     border: 1px solid var(--form-border-color);
     box-sizing: border-box;
@@ -1497,7 +1517,7 @@ input[type="checkbox"][disabled] + label {
     display: flex;
 }
 
-#dict-menu-container .dict-btn{
+#dict-menu-container .dict-btn {
     height: 100%;
     border: none;
 }
@@ -1592,7 +1612,7 @@ input[type="checkbox"][disabled] + label {
     padding: 0.3rem;
 }
 
-.dict-btn-external-img{
+.dict-btn-external-img {
     content: url("../icn/open.svg");
     right: 0.3rem;
 }
@@ -1605,7 +1625,7 @@ input[type="checkbox"][disabled] + label {
     opacity: 0.5;
 }
 
-.dict-btn:hover + #dict-select,
+.dict-btn:hover+#dict-select,
 .dict-btn:not(.dict-btn-active):hover {
     background-color: aliceblue;
 }
@@ -1616,7 +1636,7 @@ input[type="checkbox"][disabled] + label {
 }
 
 .dict-btn.dict-btn-active,
-.dict-btn.dict-btn-active + #dict-select {
+.dict-btn.dict-btn-active+#dict-select {
     background-color: #68ace0;
     color: #fff;
     /* filter: brightness(1); */
@@ -1657,6 +1677,46 @@ input[type="checkbox"][disabled] + label {
     display: none;
     border: none;
     border-top: 3px solid #68ace0;
+}
+
+.wordframecontainer,
+.dictcontainer {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+#wordframeid {
+    height: 100%;
+    width: 100%;
+}
+
+.dict-wrapper {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.dict-external-link {
+    display: none;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 3px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: #000;
+    z-index: 10;
+    text-decoration: none;
+}
+
+.dict-external-link:hover {
+    background: #e6e6e6;
+    text-decoration: none;
 }
 
 .dict-active {
@@ -1709,7 +1769,7 @@ input[type="checkbox"][disabled] + label {
     box-shadow: 0 3px 5px 0 #0000002b;
     /* easier way to hide sharp edges of list elements
     instead adding border-radius to them too */
-    overflow: hidden; 
+    overflow: hidden;
 
     transition: opacity 0.1s;
 }
@@ -1786,6 +1846,7 @@ input[type="checkbox"][disabled] + label {
     border-width: 2px;
     /* border-color: #a5a5a5; */
 }
+
 /* same as checked, but more transparent */
 #status label:hover {
     box-shadow: inset 0 0 0 2px var(--status-hover-color);
@@ -1796,19 +1857,19 @@ input[type="checkbox"][disabled] + label {
     background-color: #f5c6c0;
 }
 
-#status input:checked + label {
+#status input:checked+label {
     /* background-color: #6da8e8; */
     font-weight: 700;
     box-shadow: inset 0 0 0 2px var(--status-select-color);
     border: none;
 }
 
-#status #status-6:checked + label {
+#status #status-6:checked+label {
     background-color: var(--status-98-color);
 }
 
-#status #status-5:checked + label::after,
-#status #status-6:checked + label::after {
+#status #status-5:checked+label::after,
+#status #status-6:checked+label::after {
     filter: invert(1);
 }
 
@@ -1821,11 +1882,11 @@ input[type="checkbox"][disabled] + label {
     padding-left: 1px;
 }
 
-#status-0:checked + label {
+#status-0:checked+label {
     padding-left: 1px;
 }
 
-#status-5:checked + label {
+#status-5:checked+label {
     padding-right: 1px;
 }
 
@@ -1904,10 +1965,13 @@ input[type="checkbox"][disabled] + label {
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636" /></svg>');
 }
 
-input[name='status']:disabled + label {
-    color: grey; /* Make the label text grey */
-    cursor: not-allowed; /* Change cursor to indicate non-interactivity */
-    opacity: 0.6; /* Dim the appearance */
+input[name='status']:disabled+label {
+    color: grey;
+    /* Make the label text grey */
+    cursor: not-allowed;
+    /* Change cursor to indicate non-interactivity */
+    opacity: 0.6;
+    /* Dim the appearance */
 }
 
 /* SETTINGS TABLE */
@@ -1917,8 +1981,8 @@ input[name='status']:disabled + label {
     font-family: 'Courier New', Courier, monospace;
 }
 
-#current_theme, 
-#japanese_reading, 
+#current_theme,
+#japanese_reading,
 #backup_count,
 #stats_calc_sample_size,
 #test_mecab_btn,
@@ -1974,7 +2038,7 @@ input[name='status']:disabled + label {
         background-image: url("/static/icn/close-white.svg");
         background-color: #79b7e7;
         border-top-left-radius: 0;
-        
+
         display: block;
     }
 
@@ -1988,7 +2052,8 @@ input[name='status']:disabled + label {
         top: 0;
         width: 100%;
         background: var(--background-color);
-        height: 4rem; /* Matches the read_pane_left margin-top. */
+        height: 4rem;
+        /* Matches the read_pane_left margin-top. */
         z-index: 1001;
         margin-bottom: 0.5rem;
     }
@@ -1998,8 +2063,17 @@ input[name='status']:disabled + label {
     }
 
     #read_pane_left {
-        width: unset !important;
-        margin-top: 4rem;
+        width: 100% !important;
+        height: calc(100vh - 3.5rem);
+        /* Space for nav */
+        overflow-y: auto;
+        padding-bottom: 2rem;
+        box-sizing: border-box;
+    }
+
+    #read_pane_container {
+        height: 100vh;
+        overflow: hidden;
     }
 
     .reading_header_container {
@@ -2014,32 +2088,149 @@ input[name='status']:disabled + label {
         align-items: flex-end;
     }
 
+    /* FULL SCREEN TOOLS PANE controlled by bottom nav */
     div#read_pane_right {
         background-color: white;
         z-index: 1003;
-        transform: translateY(100%);
-        /* transition: all creates issues for drag resizing (laggy, slow)*/
-        transition: transform 0.2s cubic-bezier(0.77,0.2,0.05,1.0), 
-                    opacity 0.2s cubic-bezier(0.77,0.2,0.05,1.0);
         width: 100% !important;
-        height: 100vh !important; /* unset height set when player is sticky */
-        bottom: 0;
+        height: calc(100vh - 3.5rem) !important;
+        position: fixed;
+        bottom: 3.5rem;
+        /* Sit above nav */
         left: 0;
-        opacity: 0;
-        /* for touch drag resize to work */
-        touch-action: none;
+        border-top: 1px solid #ccc;
+        display: grid;
+        grid-template-rows: 50px 1fr;
+        /* Explicit pixel height */
+        grid-template-areas:
+            "tabs"
+            "content";
     }
 
-    #read_pane_right::after {
-        content: '';
-        background-color: #79b7e7;
-        position: absolute;
-        left: 0;
-        top: 0;
-        transform: translateY(-50%);
+    #dicttabs {
+        grid-area: tabs;
+        display: flex;
+        align-items: center;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        background: #f8f9fa;
+        border-bottom: 1px solid #dee2e6;
+        padding: 0 5px;
+        height: 50px !important;
+        /* Force height */
+        min-height: 50px !important;
+        /* Force min-height */
+        box-sizing: border-box;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    #dicttabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    #dicttabslayout {
+        display: flex !important;
+        /* Override JS inline grid */
+        gap: 0.5rem;
+    }
+
+    #dicttabsstatic {
+        display: flex;
+        gap: 0.5rem;
+        margin-left: 0.5rem;
+        padding-left: 0.5rem;
+        border-left: 1px solid #ccc;
+    }
+
+    /* Adjust button styles for mobile tabs */
+    #dicttabs .dict-btn {
+        height: 2.2rem;
+        /* Slightly smaller to fit comfortably */
+        padding: 0 1rem;
+        font-size: 0.9rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background: white;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: fit-content;
+        width: auto !important;
+        /* Override global 100% width */
+        flex: 0 0 auto;
+        /* PREVENT SHRINKING */
+        margin-right: 5px;
+        /* Spacing between tabs */
+    }
+
+    #dicttabs .dict-btn-active {
+        background: #0d6efd;
+        color: white;
+        border-color: #0d6efd;
+    }
+
+    .wordframecontainer,
+    .dictcontainer {
+        grid-area: content;
+        height: 100%;
         width: 100%;
-        height: 6px;
-        cursor: row-resize;
+        overflow: hidden;
+    }
+
+    /* Bottom Nav Bar */
+    .mobile-bottom-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3.5rem;
+        background: #f8f9fa;
+        border-top: 1px solid #ddd;
+        z-index: 2000;
+    }
+
+    .mobile-nav-btn {
+        flex: 1;
+        background: none;
+        border: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        color: #6c757d;
+        cursor: pointer;
+    }
+
+    .mobile-nav-btn.active {
+        color: #0d6efd;
+        font-weight: bold;
+        background-color: #e9ecef;
+    }
+
+    .nav-icon {
+        font-size: 1.2rem;
+        margin-bottom: 2px;
+    }
+
+    .mobile-hide {
+        display: none !important;
+    }
+
+    /* Hide nav on desktop */
+    @media screen and (min-width: 981px) {
+        .mobile-bottom-nav {
+            display: none;
+        }
+    }
+
+    /* Removing drag handle after for split view as it is fixed ratio for now, can add back later if resizing needed */
+    #read_pane_right::after {
+        display: none;
     }
 
     /*drag button*/
@@ -2050,19 +2241,15 @@ input[name='status']:disabled + label {
         position: absolute;
         top: 0;
         cursor: row-resize;
-        
+
         background-image: url("/static/icn/drag-handle.svg");
         background-position: center;
         background-repeat: no-repeat;
     }
 
+    /* Removing top drag handles */
     #read_pane_right::before {
-        right: 0;
-        transform: translate(0, -100%);
-        width: 50px;
-        height: 42px;
-        border-top-left-radius: 5px;
-        background-size: 91%;
+        display: none;
     }
 
     .dictcontainer::before {
@@ -2168,7 +2355,7 @@ input[name='status']:disabled + label {
     font-size: 0.8rem;
     box-sizing: border-box;
     /* saturate the colors  */
-    filter: saturate(2.4) brightness(0.95); 
+    filter: saturate(2.4) brightness(0.95);
 }
 
 .status-bar0 {
@@ -2214,7 +2401,8 @@ input[name='status']:disabled + label {
 
 table#termtable .tagify,
 table#termtable .translationDiv {
-    border: 1px solid transparent;  /* Prevent elements pushing others around on hover. */
+    border: 1px solid transparent;
+    /* Prevent elements pushing others around on hover. */
     box-sizing: border-box;
 }
 
@@ -2256,7 +2444,7 @@ table#termtable .translationDiv:hover {
     position: absolute;
     background-color: #f1f1f1;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
@@ -2278,6 +2466,7 @@ table#termtable .translationDiv:hover {
 .term-action-dropdown:hover .term-action-content {
     display: block;
 }
+
 .term-action-dropdown:hover .term-action-button {
     background-color: #3e8e41;
 }
@@ -2288,14 +2477,19 @@ div#termtable_wrapper div.dt-buttons {
 
 .ajax-saved-checkmark {
     position: absolute;
-    width: 1.5em; /* Define the size of the circle */
-    height: 1.5em; /* Make it a perfect circle */
+    width: 1.5em;
+    /* Define the size of the circle */
+    height: 1.5em;
+    /* Make it a perfect circle */
     background: green;
     color: white;
-    border-radius: 50%; /* Turns the square into a circle */
-    font-size: 1em; /* Adjust size of the checkmark */
+    border-radius: 50%;
+    /* Turns the square into a circle */
+    font-size: 1em;
+    /* Adjust size of the checkmark */
     text-align: center;
-    line-height: 1.5em; /* Vertically center the checkmark */
+    line-height: 1.5em;
+    /* Vertically center the checkmark */
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
     z-index: 2004;
 }
@@ -2319,8 +2513,8 @@ div#termimagesearch .saved {
     border: solid 2px green !important;
 }
 
-div#termimagesearch span > img {
-    display:inline;
+div#termimagesearch span>img {
+    display: inline;
 }
 
 div#termimagesearch span.imageAction {

@@ -16,12 +16,24 @@ class LookupButton {
   static all = [];
 
   constructor(frameName) {
-    let createIFrame = function(name) {
+    let createIFrame = function (name) {
+      const container = document.createElement("div");
+      container.classList.add("dict-wrapper");
+
       const f = document.createElement("iframe");
       f.name = name;
       f.src = "about:blank";
       f.classList.add("dictframe");
-      return f;
+
+      const link = document.createElement("a");
+      link.textContent = "Open in New Tab ↗";
+      link.target = "_blank";
+      link.classList.add("dict-external-link");
+      link.style.display = "none"; // Hidden by default
+
+      container.appendChild(link);
+      container.appendChild(f);
+      return container;
     };
 
     this.dictID = null;
@@ -48,16 +60,49 @@ class LookupButton {
     this.is_active = false;
     this.btn.classList.remove("dict-btn-active");
     this.frame.classList.remove("dict-active");
+    const iframe = this.frame.querySelector("iframe");
+    if (iframe) iframe.classList.remove("dict-active");
   }
 
   activate() {
     DictButton.all.forEach(button => button.deactivate());
     this.is_active = true;
     this.btn.classList.add("dict-btn-active");
-    this.frame.classList.add("dict-active");
+    this.is_active = true;
+    this.btn.classList.add("dict-btn-active");
+    this.frame.classList.add("dict-active"); // Note: this.frame is now the wrapper div
+
+    // Ensure the iframe inside matches active state if needed (CSS usually handles parent .dict-active)
+    const iframe = this.frame.querySelector("iframe");
+    if (iframe) iframe.classList.add("dict-active");
+
+    // Toggle containers based on button type
+    const wordFrameContainer = document.querySelector(".wordframecontainer");
+    const dictFrames = document.getElementById("dictframes");
+
+    if (this instanceof TermFrameButton) {
+      if (wordFrameContainer) wordFrameContainer.style.display = 'block';
+      if (dictFrames) dictFrames.style.display = 'none';
+    } else {
+      if (wordFrameContainer) wordFrameContainer.style.display = 'none';
+      if (dictFrames) dictFrames.style.display = 'block';
+    }
   }
 
 };
+
+class TermFrameButton extends LookupButton {
+  constructor() {
+    super("term-frame"); // Dummy frame name, we control existing wordframecontainer
+    this.btn.textContent = "Word Info";
+    this.btn.setAttribute("title", "Word Details");
+  }
+
+  do_lookup() {
+    // No-op for lookup, just activates (handled in activate())
+    this.activate();
+  }
+}
 
 
 /**
@@ -89,7 +134,7 @@ class GeneralLookupButton extends LookupButton {
 
 class SentenceLookupButton extends GeneralLookupButton {
   constructor() {
-    let handler = function(iframe) {
+    let handler = function (iframe) {
       const txt = LookupButton.TERM_FORM_CONTAINER.querySelector("#text").value;
       // %E2%80%8B is the zero-width string.  The term is reparsed
       // on the server, so this doesn't need to be sent.
@@ -103,7 +148,8 @@ class SentenceLookupButton extends GeneralLookupButton {
       // multi-word terms are actually created and saved.  e.g., I can
       // highlight the text "a big thing" and see if that phrase has
       // been used in anything I've read already.
-      iframe.setAttribute("src", `/term/sentences/${LookupButton.LANG_ID}/${t}`);
+      const actualIframe = iframe.querySelector("iframe");
+      if (actualIframe) actualIframe.setAttribute("src", `/term/sentences/${LookupButton.LANG_ID}/${t}`);
     };
 
     super("sentences-btn", "Sentences", "See term usage", "dict-sentences-btn", handler);
@@ -115,14 +161,14 @@ class ImageLookupButton extends GeneralLookupButton {
   constructor() {
 
     // Parents are in the tagify-managed #parentslist input box.
-    let _get_parent_tag_values = function() {
+    let _get_parent_tag_values = function () {
       const pdata = LookupButton.TERM_FORM_CONTAINER.querySelector("#parentslist").value
       if ((pdata ?? '') == '')
         return [];
       return JSON.parse(pdata).map(e => e.value);
     };
 
-    let handler = function(iframe) {
+    let handler = function (iframe) {
       const text = LookupButton.TERM_FORM_CONTAINER.querySelector("#text").value;
       const lang_id = LookupButton.LANG_ID;
       if (lang_id == null || lang_id == '' || parseInt(lang_id) == 0 || text == null || text == '') {
@@ -140,7 +186,8 @@ class ImageLookupButton extends GeneralLookupButton {
       const binghash = raw_bing_url.replace('https://www.bing.com/images/search?', '');
       const url = `/bing/search_page/${LookupButton.LANG_ID}/${encodeURIComponent(use_text)}/${encodeURIComponent(binghash)}`;
 
-      iframe.setAttribute("src", url);
+      const actualIframe = iframe.querySelector("iframe");
+      if (actualIframe) actualIframe.setAttribute("src", url);
     };  // end handler
 
     super("dict-image-btn", null, "Lookup images", "dict-image-btn", handler);
@@ -182,7 +229,7 @@ class DictButton extends LookupButton {
       const favicon_src = `http://www.google.com/s2/favicons?domain=${domain}`;
       fimg.src = favicon_src;
     }
-    catch(err) {}
+    catch (err) { }
 
     this.btn.textContent = this.label;
 
@@ -224,13 +271,19 @@ class DictButton extends LookupButton {
     const zeroWidthSpace = '\u200b';
     const sqlZWS = '%E2%80%8B';
     const cleantext = term.
-          replaceAll(zeroWidthSpace, '').
-          replace(/\s+/g, ' ');
+      replaceAll(zeroWidthSpace, '').
+      replace(/\s+/g, ' ');
     const searchterm = encodeURIComponent(cleantext).
-          replaceAll(sqlZWS, '');
+      replaceAll(sqlZWS, '');
+    ret = ret.replace('[LUTE]', searchterm);
     ret = ret.replace('[LUTE]', searchterm);
     ret = ret.replace('###', searchterm);  // TODO remove_old_###_placeholder
     return ret;
+  }
+
+  // Helper to check if mobile
+  _isMobile() {
+    return window.matchMedia("(max-width: 980px)").matches;
   }
 
   _load_popup(url, term) {
@@ -239,10 +292,30 @@ class DictButton extends LookupButton {
     if (url[0] == "*")  // Should be true!
       url = url.slice(1);
     const lookup_url = this._get_lookup_url(url, term);
+
+    // On mobile, try to load in frame first if user requested "embedded" behavior via split screen
+    // or just always try to embed if it is the requested behavior.
+    if (this._isMobile()) {
+      this._load_frame_with_url(lookup_url);
+      return;
+    }
+
     let settings = 'width=800, height=600, scrollbars=yes, menubar=no, resizable=yes, status=no'
     if (LUTE_USER_SETTINGS.open_popup_in_new_tab)
       settings = null;
     window.open(lookup_url, 'otherwin', settings);
+  }
+
+  _load_frame_with_url(url) {
+    const iframe = this.frame.querySelector("iframe");
+    if (iframe) iframe.setAttribute("src", url);
+
+    const link = this.frame.querySelector(".dict-external-link");
+    if (link) {
+      link.href = url;
+      link.style.display = "block";
+    }
+    this.contentLoaded = true;
   }
 
   _load_frame(dicturl, text) {
@@ -264,7 +337,7 @@ class DictButton extends LookupButton {
       url = `/bing/search/${LookupButton.LANG_ID}/${encodeURIComponent(use_text)}/${encodeURIComponent(binghash)}`;
     }
 
-    this.frame.setAttribute("src", url);
+    this._load_frame_with_url(url);
     this.contentLoaded = true;
   }
 
@@ -309,7 +382,7 @@ function _create_dict_dropdown_div(buttons_in_list) {
  * Create all buttons.
  */
 function createLookupButtons(tab_count = 5) {
-  let destroy_existing_dictTab_controls = function() {
+  let destroy_existing_dictTab_controls = function () {
     document.querySelectorAll(".dict-btn").forEach(item => item.remove())
     document.querySelectorAll(".dictframe").forEach(item => item.remove())
     const el = document.getElementById("dict-menu-container");
@@ -318,6 +391,9 @@ function createLookupButtons(tab_count = 5) {
   }
   destroy_existing_dictTab_controls();
   LookupButton.all = [];
+
+  // Create Term Button first so it's first in All and first in UI
+  new TermFrameButton();
 
   if (LookupButton.TERM_DICTS.length <= 0) return;
 
@@ -330,7 +406,7 @@ function createLookupButtons(tab_count = 5) {
   }
 
   // Make all DictButtons, which loads LookupButton.all.
-  LookupButton.TERM_DICTS.forEach((dict, index) => { new DictButton(dict,`dict${index}`); });
+  LookupButton.TERM_DICTS.forEach((dict, index) => { new DictButton(dict, `dict${index}`); });
   const tab_buttons = LookupButton.all.slice(0, tab_count);
   const list_buttons = LookupButton.all.slice(tab_count);
 
@@ -348,10 +424,13 @@ function createLookupButtons(tab_count = 5) {
   const first_button = LookupButton.all[0];
   if (first_button) {
     first_button.activate();
-    first_button.do_lookup();
+    // Only do lookup if it's NOT the term button (term button doesn't need init lookup, but it does need activate)
+    if (!(first_button instanceof TermFrameButton))
+      first_button.do_lookup();
   }
 
   for (let b of [new SentenceLookupButton(), new ImageLookupButton()])
+    // ...
     document.getElementById("dicttabsstatic").appendChild(b.btn);
 
   const dictframes = document.getElementById("dictframes");
